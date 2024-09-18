@@ -1,3 +1,5 @@
+// Cole and Bekah CSC 121
+
 import processing.core.*;
 import processing.event.*;
 
