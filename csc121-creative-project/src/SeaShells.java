@@ -20,10 +20,30 @@ public class SeaShells extends PApplet {
         this.rightBound = rightBound;
     }
 
-    public PApplet draw(PApplet canvas) {
+    public PApplet draw(PApplet c) {
         canvas.noStroke();
         canvas.fill(0, 255, 127);  // Sea green color for SeaShells
         canvas.ellipse(x, y, radius * 2, radius * 2);
         return canvas;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        SeaShells seaShells = (SeaShells) obj;
+        return x == seaShells.x && y == seaShells.y && radius == seaShells.radius &&
+               topBound == seaShells.topBound && bottomBound == seaShells.bottomBound &&
+               leftBound == seaShells.leftBound && rightBound == seaShells.rightBound;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y, radius, topBound, bottomBound, leftBound, rightBound);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("SeaShells at (%d, %d) with radius %d", x, y, radius);
     }
 }
