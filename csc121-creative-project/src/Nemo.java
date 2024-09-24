@@ -44,9 +44,30 @@ public class Nemo extends PApplet {
     }
 
     public PApplet draw(PApplet c) {
-        canvas.noStroke();
-        canvas.fill(255, 200, 0);  // Yellow color for Nemo
-        canvas.rect(x, y, width, height);
-        return canvas;
+        c.noStroke();
+        c.fill(255, 200, 0);  // Yellow color for Nemo
+        c.rect(x, y, width, height);
+        return c;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Nemo nemo = (Nemo) obj;
+        return x == nemo.x && y == nemo.y && width == nemo.width && height == nemo.height &&
+               topBound == nemo.topBound && bottomBound == nemo.bottomBound &&
+               leftBound == nemo.leftBound && rightBound == nemo.rightBound &&
+               playerSpeed == nemo.playerSpeed;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y, width, height, topBound, bottomBound, leftBound, rightBound, playerSpeed);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Nemo at (%d, %d) with size (%d x %d)", x, y, width, height);
     }
 }
