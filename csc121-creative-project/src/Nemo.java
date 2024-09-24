@@ -43,7 +43,7 @@ public class Nemo extends PApplet {
         }
     }
 
-    public PApplet draw(PApplet canvas) {
+    public PApplet draw(PApplet c) {
         canvas.noStroke();
         canvas.fill(255, 200, 0);  // Yellow color for Nemo
         canvas.rect(x, y, width, height);
