@@ -21,10 +21,10 @@ public class SeaShells extends PApplet {
     }
 
     public PApplet draw(PApplet c) {
-        canvas.noStroke();
-        canvas.fill(0, 255, 127);  // Sea green color for SeaShells
-        canvas.ellipse(x, y, radius * 2, radius * 2);
-        return canvas;
+        c.noStroke();
+        c.fill(0, 255, 127);  // Sea green color for SeaShells
+        c.ellipse(x, y, radius * 2, radius * 2);
+        return c;
     }
 
     @Override
