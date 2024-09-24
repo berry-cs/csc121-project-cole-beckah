@@ -6,7 +6,7 @@ import processing.event.*;
 /**
  * Provides the scaffolding to launch a Processing application
  */
-public class AppTemplate extends PApplet {	// <----- 1. rename AppTemplate everywhere in this file
+public class NemoApp extends PApplet {	// <----- 1. rename AppTemplate everywhere in this file
     IWorld w;
     
     public void settings() {
@@ -78,6 +78,6 @@ public class AppTemplate extends PApplet {	// <----- 1. rename AppTemplate every
     }
 
     public static void main(String[] args) {
-        PApplet.runSketch(new String[] { AppTemplate.class.getName() }, new AppTemplate());
+        PApplet.runSketch(new String[] { NemoApp.class.getName() }, new NemoApp());
     }
 }
