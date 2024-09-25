@@ -3,6 +3,7 @@ import java.util.Objects;
 import processing.core.PApplet;
 
 public class Wall  {
+	//loc is top-left corner
 	Posn loc;
 	int w;
 	int h;

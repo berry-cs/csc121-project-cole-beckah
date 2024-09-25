@@ -3,14 +3,21 @@ import java.util.Objects;
 import processing.core.*;
 
 public class Shark {
+	//loc is top-left corner
 	Posn loc;
 	Posn speed;
 	Posn spawnpoint;
 	int h;
 	int w;
-
 	
-	public Shark(Posn loc, Posn speed, Posn spawnpoint, int w, int h) {
+	/** can I do this?
+	double top = loc.getY();
+	double bottom = loc.getY() + this.h;
+	double left = loc.getX();
+	double right = loc.getX() + this.w;
+	*/
+	
+	public Shark(Posn loc, Posn speed, Posn spawnpoint, int h, int w) {
 		super();
 		this.loc = loc;
 		this.speed = speed;
@@ -46,8 +53,18 @@ public class Shark {
 
 	public PApplet draw(PApplet c) {
 		c.stroke(0);   // color black
+		c.pushMatrix();
+		
+		c.translate((int)this.loc.getX(), (int)this.loc.getY());
+		c.scale(.15f);
+		if (this.speed.getX() > 0) {
+			c.scale(-1, 1);
+		}
+		
 		c.imageMode(PApplet.CENTER);
-		c.image(c.loadImage("shark.png"), (int)this.loc.getX(), (int)this.loc.getY());
+		c.image(c.loadImage("shark.png"), 0, 0);
+		
+		c.popMatrix();
 		return c;
 	}
 
