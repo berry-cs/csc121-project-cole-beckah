@@ -61,7 +61,7 @@ public class Nemo {
 	public PApplet draw(PApplet c) {
 		c.noStroke();
 		c.fill(255, 165, 0);  // Orange color for Nemo
-		c.rect((float)this.loc.getX(), (float)this.loc.getY(), width, height);
+		c.rect((int)this.loc.getX(), (int)this.loc.getY(), width, height);
 		return c;
 	}
 
