@@ -7,12 +7,16 @@ import processing.event.MouseEvent;
 public class NemoWorld implements IWorld{
 	Shark s;
 	Wall w;
+	Nemo n;
+	SeaShells ss;
 	
 	
-	public NemoWorld(Shark s, Wall w) {
+	public NemoWorld(Shark s, Wall w, Nemo n, SeaShells ss) {
 		super();
 		this.s = s;
 		this.w = w;
+		this.n = n;
+		this.ss = ss;
 	}
 	
 	
@@ -21,6 +25,8 @@ public class NemoWorld implements IWorld{
         c.background(135, 206, 250);  // clear the screen each time (color sky blue)
         this.s.draw(c);
         this.w.draw(c);
+        this.n.draw(c);
+        this.ss.draw(c);
         return c;
     }
 	
