@@ -7,12 +7,16 @@ import processing.event.MouseEvent;
 public class NemoWorld implements IWorld{
 	Shark s;
 	Wall w;
+	Nemo n;
+	SeaShells ss;
 	
 	
-	public NemoWorld(Shark s, Wall w) {
+	public NemoWorld(Shark s, Wall w, Nemo n, SeaShells ss) {
 		super();
 		this.s = s;
 		this.w = w;
+		this.n = n;
+		this.ss = ss;
 	}
 	
 	
@@ -25,12 +29,14 @@ public class NemoWorld implements IWorld{
         c.fill(0,0,255);
         c.circle(200, 200, 5);
         
+        this.n.draw(c);
+        this.ss.draw(c);
         return c;
     }
 	
     /** produce an updated state of this world after one time tick */
 	public IWorld update() { 
-		return new NemoWorld( this.s.move(), this.w );
+		return new NemoWorld(this.s.move(), this.w, this.n.move(false, false, false, false), this.ss);
 	}
 
 

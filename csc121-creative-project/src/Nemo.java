@@ -1,74 +1,96 @@
+import processing.core.*;
 import java.util.Objects;
-import processing.core.PApplet;
 
-public class Nemo extends PApplet {
-    int x;
-    int y;
-    int width;
-    int height;
-    boolean isMovingUp;
-    boolean isMovingDown;
-    boolean isMovingLeft;
-    boolean isMovingRight;
-    int playerSpeed;
-    int topBound;
-    int bottomBound;
-    int leftBound;
-    int rightBound;
+public class Nemo {
+	Posn loc;
+	int width;
+	int height;
+	int playerSpeed;
+	int topBound;
+	int bottomBound;
+	int leftBound;
+	int rightBound;
 
-    public Nemo(int x, int y, int width, int height, int playerSpeed,
-                int topBound, int bottomBound, int leftBound, int rightBound) {
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
-        this.playerSpeed = playerSpeed;
-        this.topBound = topBound;
-        this.bottomBound = bottomBound;
-        this.leftBound = leftBound;
-        this.rightBound = rightBound;
-    }
+	public Nemo(Posn loc, int width, int height, int playerSpeed, 
+	            int topBound, int bottomBound, int leftBound, int rightBound) {
+		super();
+		this.loc = loc;
+		this.width = width;
+		this.height = height;
+		this.playerSpeed = playerSpeed;
+		this.topBound = topBound;
+		this.bottomBound = bottomBound;
+		this.leftBound = leftBound;
+		this.rightBound = rightBound;
+	}
 
-    public void move() {
-        if (isMovingUp && y > topBound) {
-            y -= playerSpeed;
-        }
-        if (isMovingDown && y + height < bottomBound) {
-            y += playerSpeed;
-        }
-        if (isMovingLeft && x > leftBound) {
-            x -= playerSpeed;
-        }
-        if (isMovingRight && x + width < rightBound) {
-            x += playerSpeed;
-        }
-    }
+	public double getTop() {
+		return this.loc.getY();
+	}
 
-    public PApplet draw(PApplet c) {
-        c.noStroke();
-        c.fill(255, 200, 0);  // Yellow color for Nemo
-        c.rect(x, y, width, height);
-        return c;
-    }
+	public double getBottom() {
+		return this.loc.getY() + this.height;
+	}
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-        Nemo nemo = (Nemo) obj;
-        return x == nemo.x && y == nemo.y && width == nemo.width && height == nemo.height &&
-               topBound == nemo.topBound && bottomBound == nemo.bottomBound &&
-               leftBound == nemo.leftBound && rightBound == nemo.rightBound &&
-               playerSpeed == nemo.playerSpeed;
-    }
+	public double getLeft() {
+		return this.loc.getX();
+	}
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(x, y, width, height, topBound, bottomBound, leftBound, rightBound, playerSpeed);
-    }
+   
+    
+	public double getRight() {
+		return this.loc.getX() + this.width;
+	}
 
-    @Override
-    public String toString() {
-        return String.format("Nemo at (%d, %d) with size (%d x %d)", x, y, width, height);
-    }
+	public Nemo move(boolean isMovingUp, boolean isMovingDown, boolean isMovingLeft, boolean isMovingRight) {
+		Posn newLoc = this.loc;
+		if (isMovingUp && loc.getY() > topBound) {
+			newLoc = newLoc.translate(new Posn(0, -playerSpeed));
+		}
+		if (isMovingDown && loc.getY() + height < bottomBound) {
+			newLoc = newLoc.translate(new Posn(0, playerSpeed));
+		}
+		if (isMovingLeft && loc.getX() > leftBound) {
+			newLoc = newLoc.translate(new Posn(-playerSpeed, 0));
+		}
+		if (isMovingRight && loc.getX() + width < rightBound) {
+			newLoc = newLoc.translate(new Posn(playerSpeed, 0));
+		}
+		return new Nemo(newLoc, this.width, this.height, this.playerSpeed, this.topBound, this.bottomBound, this.leftBound, this.rightBound);
+	}
+
+	public PApplet draw(PApplet c) {
+		c.noStroke();
+		c.fill(255, 165, 0);  // Orange color for Nemo
+		c.rect((int)this.loc.getX(), (int)this.loc.getY(), width, height);
+		return c;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(loc, width, height, playerSpeed, topBound, bottomBound, leftBound, rightBound);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Nemo other = (Nemo) obj;
+		return width == other.width && height == other.height && playerSpeed == other.playerSpeed
+				&& topBound == other.topBound && bottomBound == other.bottomBound
+				&& leftBound == other.leftBound && rightBound == other.rightBound
+				&& Objects.equals(loc, other.loc);
+	}
+
+	@Override
+	public String toString() {
+		return "Nemo [loc=" + loc + ", width=" + width + ", height=" + height 
+				+ ", playerSpeed=" + playerSpeed + ", topBound=" + topBound 
+				+ ", bottomBound=" + bottomBound + ", leftBound=" + leftBound 
+				+ ", rightBound=" + rightBound + "]";
+	}
 }
