@@ -60,4 +60,11 @@ public class Wall implements Drawable {
 	public String toString() {
 		return "Wall [loc=" + loc + ", w=" + w + ", h=" + h + "]";
 	}
+
+
+	@Override
+	public Drawable move() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

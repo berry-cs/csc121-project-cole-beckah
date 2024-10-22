@@ -1,9 +1,6 @@
 import java.util.Objects;
 
 import processing.core.PApplet;
-import java.util.Objects;
-
-import processing.core.*;
 
 public class SeaShells {
 	Posn loc;

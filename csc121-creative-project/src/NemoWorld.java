@@ -2,7 +2,6 @@ import java.util.Objects;
 
 import processing.core.*;
 import processing.event.KeyEvent;
-import processing.event.MouseEvent;
 
 public class NemoWorld implements IWorld{
 	ILoT<Shark> sharkList;
@@ -34,9 +33,10 @@ public class NemoWorld implements IWorld{
     }
 	
     /** produce an updated state of this world after one time tick */
-	public IWorld update() { 
-		return new NemoWorld(this.sharkList, this.wallList, this.n, this.ss);
-	}
+    public IWorld update() {
+        ILoT<Shark> updatedSharkList = this.sharkList.update();  // Update the sharks
+        return new NemoWorld(updatedSharkList, this.wallList, this.n, this.ss);
+    }
 	
 	public IWorld keyPressed(KeyEvent kev) {
         boolean isUp = kev.getKeyCode() == PApplet.UP;

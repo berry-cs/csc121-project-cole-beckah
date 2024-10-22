@@ -6,6 +6,7 @@ import processing.core.PApplet;
  * the type could be anything) */
 public interface ILoT<Z> extends Drawable{
 	void draw(PApplet c);
+	ILoT<Z> update();
 }
 
 
@@ -15,6 +16,14 @@ class MT<S extends Drawable> implements ILoT<S> {
 
 	public void draw(PApplet c) {
         // Do nothing for an empty list
+    }
+	
+	public ILoT<S> update() {
+        return this;
+    }
+	
+	public Drawable move() {
+        return this;
     }
 	
 	@Override
@@ -50,6 +59,14 @@ class Cons<T extends Drawable> implements ILoT<T> {
 	public void draw(PApplet c) {
         first.draw(c);
         rest.draw(c);
+    }
+	
+	public ILoT<T> update() {
+        return new Cons<T>((T) first.move(), rest.update());
+    }
+	
+	public Drawable move() {
+        return new Cons<T>((T) first.move(), (ILoT<T>) rest.move());  // Recursively move both the first and the rest
     }
 
 	@Override

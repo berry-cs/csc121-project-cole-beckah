@@ -4,10 +4,13 @@ import org.junit.jupiter.api.Test;
 
 class NemoWorldTest {
 
-	Shark s1 = new Shark(new Posn(100, 100), new Posn(2, 0), new Posn(100, 400), 5, 10);
-	Shark s2 = new Shark(new Posn(100, 200), new Posn(2, 0), new Posn(100, 400), 5, 10);
-	Shark s3 = new Shark(new Posn(100, 300), new Posn(2, 0), new Posn(100, 400), 5, 10);
-	Shark s4 = new Shark(new Posn(300, 200), new Posn(2, 0), new Posn(300, 400), 5, 10);
+	int screenWidth = 400;
+    int screenHeight = 400;
+
+    Shark s1 = new Shark(new Posn(100, 100), new Posn(2, 0), new Posn(100, 400), 5, 10, screenWidth, screenHeight);
+    Shark s2 = new Shark(new Posn(100, 200), new Posn(2, 0), new Posn(100, 400), 5, 10, screenWidth, screenHeight);
+    Shark s3 = new Shark(new Posn(100, 300), new Posn(2, 0), new Posn(100, 400), 5, 10, screenWidth, screenHeight);
+    Shark s4 = new Shark(new Posn(300, 200), new Posn(2, 0), new Posn(300, 400), 5, 10, screenWidth, screenHeight);
 
 	Wall w1 = new Wall(new Posn(100, 100), 50, 10);
 	Wall w2 = new Wall(new Posn(200, 100), 50, 10);
@@ -35,6 +38,15 @@ class NemoWorldTest {
 
 	@Test
 	void testUpdate() {
-	}
+		// Initial position of shark s1
+        assertEquals(100, s1.getLeft());
+
+        // Update
+        IWorld updatedWorld = world1.update();
+
+        // Check if shark s1 moved 2 units to the right
+        Shark updatedS1 = ((Cons<Shark>) ((NemoWorld) updatedWorld).sharkList).first;
+        assertEquals(102, updatedS1.getLeft());
+    }
 
 }
