@@ -1,17 +1,21 @@
-
 import java.util.Objects;
+import processing.core.PApplet;
 
 /** represents a list of
  * things of the 'same' type (where
  * the type could be anything) */
-public interface ILoT<Z> {
-
+public interface ILoT<Z> extends Drawable{
+	void draw(PApplet c);
 }
 
 
 /** represents an empty
  * list of anything */
-class MT<S> implements ILoT<S> {
+class MT<S extends Drawable> implements ILoT<S> {
+
+	public void draw(PApplet c) {
+        // Do nothing for an empty list
+    }
 	
 	@Override
 	public boolean equals(Object other) {
@@ -33,17 +37,20 @@ class MT<S> implements ILoT<S> {
 
 /** to represent a list
  * with something added to it */
-class Cons<T> implements ILoT<T> {
-	 T first;
-	 ILoT<T> rest;
-	 
+class Cons<T extends Drawable> implements ILoT<T> {
+	T first;
+	ILoT<T> rest;
+
 	Cons(T first, ILoT<T> rest) {
 		super();
 		this.first = first;
 		this.rest = rest;
 	}
-	
 
+	public void draw(PApplet c) {
+        first.draw(c);
+        rest.draw(c);
+    }
 
 	@Override
 	public int hashCode() {
@@ -62,6 +69,6 @@ class Cons<T> implements ILoT<T> {
 		Cons other = (Cons) obj;
 		return Objects.equals(first, other.first) && Objects.equals(rest, other.rest);
 	}
-	
-	
+
+
 }

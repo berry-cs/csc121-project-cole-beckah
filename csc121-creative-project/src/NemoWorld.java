@@ -21,28 +21,37 @@ public class NemoWorld implements IWorld{
 	/** produce an image of the state of this animation on given canvas */
     public PApplet draw(PApplet c) {
         c.background(135, 206, 250);  // clear the screen each time (color sky blue)
-        this.s.draw(c);
-        this.w.draw(c);
+        this.sharkList.draw(c);
+        this.wallList.draw(c);
         
         c.fill(0,0,255);
         c.circle(200, 200, 5);
         
-        this.n.draw(c);
-        this.ss.draw(c);
+        this.n.draw(c); // draw nemo
+        this.ss.draw(c); // draw seashells
+        
         return c;
     }
 	
     /** produce an updated state of this world after one time tick */
 	public IWorld update() { 
-		return new NemoWorld();
+		return new NemoWorld(this.sharkList, this.wallList, this.n, this.ss);
 	}
+	
+	public IWorld keyPressed(KeyEvent kev) {
+        boolean isUp = kev.getKeyCode() == PApplet.UP;
+        boolean isDown = kev.getKeyCode() == PApplet.DOWN;
+        boolean isLeft = kev.getKeyCode() == PApplet.LEFT;
+        boolean isRight = kev.getKeyCode() == PApplet.RIGHT;
 
+        Nemo updatedNemo = this.n.move(isUp, isDown, isLeft, isRight);
+        return new NemoWorld(this.sharkList, this.wallList, updatedNemo, this.ss);
+    }
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(s, w);
+		return Objects.hash(n, sharkList, ss, wallList);
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -53,16 +62,12 @@ public class NemoWorld implements IWorld{
 		if (getClass() != obj.getClass())
 			return false;
 		NemoWorld other = (NemoWorld) obj;
-		return Objects.equals(s, other.s) && Objects.equals(w, other.w);
+		return Objects.equals(n, other.n) && Objects.equals(sharkList, other.sharkList) && Objects.equals(ss, other.ss)
+				&& Objects.equals(wallList, other.wallList);
 	}
-
 
 	@Override
 	public String toString() {
-		return "NemoWorld [s=" + s + ", w=" + w + "]";
-	}
-
-	
-	
-	
+		return "NemoWorld [sharkList=" + sharkList + ", wallList=" + wallList + ", n=" + n + ", ss=" + ss + "]";
+	}	
 }

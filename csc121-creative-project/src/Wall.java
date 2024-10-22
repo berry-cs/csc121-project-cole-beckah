@@ -2,7 +2,7 @@ import java.util.Objects;
 
 import processing.core.PApplet;
 
-public class Wall  {
+public class Wall implements Drawable {
 	//loc is top-left corner
 	Posn loc;
 	int w;
@@ -32,11 +32,10 @@ public class Wall  {
 		return this.loc.getX() + this.w;
 	}
 
-	public PApplet draw(PApplet c) {
+	public void draw(PApplet c) {
         c.noStroke();  // no outline
         c.fill(c.color(27, 203, 28)); // (R, G, B) = "red"
         c.rect((float)this.loc.getX(), (float)this.loc.getY(), this.w, this.h);
-        return c;
     }
 
 

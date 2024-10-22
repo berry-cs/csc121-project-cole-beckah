@@ -2,7 +2,7 @@ import java.util.Objects;
 
 import processing.core.*;
 
-public class Shark {
+public class Shark implements Drawable {
 	//loc is top-left corner
 	Posn loc;
 	Posn speed;
@@ -51,7 +51,7 @@ public class Shark {
 	    }
 	  }
 
-	public PApplet draw(PApplet c) {
+	public void draw(PApplet c) {
 		c.stroke(0);   // color black
 		c.pushMatrix();
 		
@@ -65,7 +65,6 @@ public class Shark {
 		c.image(c.loadImage("shark.png"), 0, 0);
 		
 		c.popMatrix();
-		return c;
 	}
 
 	public Shark move() {

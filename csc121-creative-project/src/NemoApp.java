@@ -24,7 +24,7 @@ public class NemoApp extends PApplet {	// <----- 1. rename AppTemplate everywher
         						new Cons<Wall>(new Wall(new Posn(300, 300), 50, 10),
         								new Cons<Wall>(new Wall(new Posn(400, 300), 50, 10),
         										new MT<Wall>())))), 
-        		new Nemo(new Posn(100,100), 30, 30, 2, 30, 30, 30, 30), 
+        		new Nemo(new Posn(100,100), 30, 30, 2, 30, 370, 30, 370), 
         		new SeaShells(new Posn(150, 150), 10, 0, 400, 0, 400));
     }
     
