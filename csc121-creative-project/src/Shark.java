@@ -69,12 +69,13 @@ public class Shark {
 	}
 
 	public Shark move() {
-		if (this.loc.getX() < 0) {
+		/*if (this.loc.getX() < 0) {
 	    	return new Shark(this.loc.translate(this.spawnpoint), this.speed, this.spawnpoint, this.h, this.w);
 	    }
 	    else {
+	    */
 	    	return new Shark(this.loc.translate(this.speed), this.speed, this.spawnpoint, this.h, this.w);
-	    }
+	    //}
 	}
 
 	@Override

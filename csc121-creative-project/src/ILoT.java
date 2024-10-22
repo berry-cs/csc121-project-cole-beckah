@@ -1,3 +1,4 @@
+
 import java.util.Objects;
 
 /** represents a list of
@@ -11,7 +12,6 @@ public interface ILoT<Z> {
 /** represents an empty
  * list of anything */
 class MT<S> implements ILoT<S> {
-	
 	
 	@Override
 	public boolean equals(Object other) {
@@ -43,7 +43,6 @@ class Cons<T> implements ILoT<T> {
 		this.rest = rest;
 	}
 	
-	
 
 
 	@Override
@@ -65,8 +64,4 @@ class Cons<T> implements ILoT<T> {
 	}
 	
 	
-	
 }
-
-
-

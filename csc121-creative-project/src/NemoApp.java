@@ -14,9 +14,17 @@ public class NemoApp extends PApplet {	// <----- 1. rename AppTemplate everywher
     }
     
     public void setup() {
-        w = new NemoWorld(
-        		new Shark(new Posn(200, 200), new Posn(-2, 0), new Posn(200, 400), 5, 10),
-        		new Wall(new Posn(100, 100), 50, 10), new Nemo(new Posn(300, 300), 20, 20, 5, 0, 400, 0, 400), 
+        w = new NemoWorld(new Cons<Shark>(new Shark(new Posn(100, 100), new Posn(2, 0), new Posn(100, 400), 5, 10),
+    			new Cons<Shark>(new Shark(new Posn(100, 200), new Posn(2, 0), new Posn(100, 400), 5, 10), 
+    					new Cons<Shark>(new Shark(new Posn(100, 300), new Posn(2, 0), new Posn(100, 400), 5, 10),
+    							new Cons<Shark>(new Shark(new Posn(300, 200), new Posn(2, 0), new Posn(300, 400), 5, 10),
+    									new MT<Shark>())))), 
+        		new Cons<Wall>(new Wall(new Posn(100, 100), 50, 10),
+        				new Cons<Wall>(new Wall(new Posn(200, 100), 50, 10), 
+        						new Cons<Wall>(new Wall(new Posn(300, 300), 50, 10),
+        								new Cons<Wall>(new Wall(new Posn(400, 300), 50, 10),
+        										new MT<Wall>())))), 
+        		new Nemo(new Posn(100,100), 30, 30, 2, 30, 30, 30, 30), 
         		new SeaShells(new Posn(150, 150), 10, 0, 400, 0, 400));
     }
     
