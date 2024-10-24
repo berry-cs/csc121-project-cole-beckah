@@ -61,6 +61,7 @@ public class Nemo {
 
 	public PApplet draw(PApplet c) {
 		c.noStroke();
+		c.rectMode(PApplet.CENTER);
 		c.fill(255, 165, 0);  // Orange color for Nemo
 		c.rect((int)this.loc.getX(), (int)this.loc.getY(), width, height);
 		return c;
@@ -93,4 +94,11 @@ public class Nemo {
 				+ ", bottomBound=" + bottomBound + ", leftBound=" + leftBound 
 				+ ", rightBound=" + rightBound + "]";
 	}
+
+	/* did this player hit any of the sharks in the list */
+	public boolean hitShark(ILoT<Shark> sharkList) {
+		return sharkList.checkHit(this.loc, this.width/2);
+	}
 }
+
+

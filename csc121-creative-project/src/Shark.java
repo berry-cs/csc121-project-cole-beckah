@@ -4,7 +4,7 @@ import processing.core.*;
 
 import java.util.Random;
 
-public class Shark implements Drawable {
+public class Shark implements GameObject<Shark> {
 	//loc is top-left corner
 	Posn loc;
 	Posn speed;
@@ -13,6 +13,9 @@ public class Shark implements Drawable {
 	int w;
 	int screenWidth;
 	int screenHeight;
+	
+	
+	final static int SHARKHITRADIUS = 10;
 
 	/** can I do this?
 	double top = loc.getY();
@@ -49,7 +52,7 @@ public class Shark implements Drawable {
 	}
 
 	// Move the shark and respawn it when necessary
-	public Shark move() {
+	public Shark update() {
         Posn newLoc = this.loc.translate(this.speed);
 
         if (newLoc.getX() > screenWidth) {
@@ -73,6 +76,9 @@ public class Shark implements Drawable {
 		c.image(c.loadImage("shark.png"), 0, 0);
 
 		c.popMatrix();
+		
+		c.fill(155);
+		c.circle((int)loc.getX() + 30, (int)loc.getY(), SHARKHITRADIUS * 2);
 	}
 
 	@Override
@@ -96,6 +102,12 @@ public class Shark implements Drawable {
 	@Override
 	public String toString() {
 		return "Shark [loc=" + loc + ", speed=" + speed + ", spawnpoint=" + spawnpoint + ", h=" + h + ", w=" + w + "]";
+	}
+
+	@Override
+	public boolean checkHit(Posn ctr, int rad) {
+		Posn sharkHitCtr = new Posn((int)loc.getX() + 30, (int)loc.getY());
+		return sharkHitCtr.distanceTo(ctr) < (SHARKHITRADIUS + rad);
 	}
 
 }

@@ -2,17 +2,17 @@ import java.util.Objects;
 
 import processing.core.PApplet;
 
-public class Wall implements Drawable {
+public class Wall implements GameObject<Wall> {
 	//loc is top-left corner
 	Posn loc;
 	int w;
 	int h;
 
-	public Wall(Posn loc, int w, int h) {
+	public Wall(Posn loc, int w) {
 		super();
 		this.loc = loc;
 		this.w = w;
-		this.h = h;
+		this.h = w;
 	}
 
 
@@ -34,6 +34,7 @@ public class Wall implements Drawable {
 
 	public void draw(PApplet c) {
         c.noStroke();  // no outline
+        c.rectMode(PApplet.CENTER);
         c.fill(c.color(27, 203, 28)); // (R, G, B) = "red"
         c.rect((float)this.loc.getX(), (float)this.loc.getY(), this.w, this.h);
     }
@@ -63,8 +64,13 @@ public class Wall implements Drawable {
 
 
 	@Override
-	public Drawable move() {
-		// TODO Auto-generated method stub
-		return null;
+	public Wall update() {
+		return this;
+	}
+
+
+	@Override
+	public boolean checkHit(Posn ctr, int rad) {
+		return false;
 	}
 }

@@ -4,25 +4,19 @@ import processing.core.PApplet;
 /** represents a list of
  * things of the 'same' type (where
  * the type could be anything) */
-public interface ILoT<Z> extends Drawable{
-	void draw(PApplet c);
-	ILoT<Z> update();
+public interface ILoT<Z extends GameObject<Z>> extends GameObject<ILoT<Z>> {
 }
 
 
 /** represents an empty
  * list of anything */
-class MT<S extends Drawable> implements ILoT<S> {
+class MT<S extends GameObject<S>> implements ILoT<S> {
 
 	public void draw(PApplet c) {
         // Do nothing for an empty list
     }
 	
 	public ILoT<S> update() {
-        return this;
-    }
-	
-	public Drawable move() {
         return this;
     }
 	
@@ -41,12 +35,17 @@ class MT<S extends Drawable> implements ILoT<S> {
 		return "MT<S> []";
 	}
 
+	@Override
+	public boolean checkHit(Posn ctr, int rad) {
+		return false;
+	}
+
 }
 
 
 /** to represent a list
  * with something added to it */
-class Cons<T extends Drawable> implements ILoT<T> {
+class Cons<T extends GameObject<T>> implements ILoT<T> {
 	T first;
 	ILoT<T> rest;
 
@@ -62,12 +61,20 @@ class Cons<T extends Drawable> implements ILoT<T> {
     }
 	
 	public ILoT<T> update() {
-        return new Cons<T>((T) first.move(), rest.update());
+        return new Cons<T>(first.update(), rest.update());  // Recursively move both the first and the rest
     }
 	
-	public Drawable move() {
-        return new Cons<T>((T) first.move(), (ILoT<T>) rest.move());  // Recursively move both the first and the rest
-    }
+	@Override
+	public boolean checkHit(Posn ctr, int rad) {
+		return this.first.checkHit(ctr, rad) || this.rest.checkHit(ctr, rad);
+		/*
+			if (this.first.checkHit(ctr, rad)) {
+				return true;
+			} else {
+				return this.rest.checkHit(ctr, rad);
+			}
+		 */
+	}
 
 	@Override
 	public int hashCode() {

@@ -12,10 +12,10 @@ class NemoWorldTest {
     Shark s3 = new Shark(new Posn(100, 300), new Posn(2, 0), new Posn(100, 400), 5, 10, screenWidth, screenHeight);
     Shark s4 = new Shark(new Posn(300, 200), new Posn(2, 0), new Posn(300, 400), 5, 10, screenWidth, screenHeight);
 
-	Wall w1 = new Wall(new Posn(100, 100), 50, 10);
-	Wall w2 = new Wall(new Posn(200, 100), 50, 10);
-	Wall w3 = new Wall(new Posn(300, 300), 50, 10);
-	Wall w4 = new Wall(new Posn(400, 300), 50, 10);
+	Wall w1 = new Wall(new Posn(100, 100), 10);
+	Wall w2 = new Wall(new Posn(200, 100), 10);
+	Wall w3 = new Wall(new Posn(300, 300), 10);
+	Wall w4 = new Wall(new Posn(400, 300), 10);
 	
 	Nemo n = new Nemo(new Posn(100,100), 30, 30, 2, 30, 30, 30, 30);
 	
@@ -48,5 +48,16 @@ class NemoWorldTest {
         Shark updatedS1 = ((Cons<Shark>) ((NemoWorld) updatedWorld).sharkList).first;
         assertEquals(102, updatedS1.getLeft());
     }
+	
+	
+	
+	@Test
+	void testCheckHit() {
+		assertEquals( false, n.hitShark(sharkList) );
+		
+		assertEquals( true, s2.checkHit(new Posn(132, 205), 15));		// s2's hit center is at (100 + 30, 200)
+		
+		
+	}
 
 }

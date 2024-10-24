@@ -6,6 +6,7 @@ import processing.event.KeyEvent;
 public class NemoWorld implements IWorld{
 	ILoT<Shark> sharkList;
 	ILoT<Wall> wallList;
+
 	Nemo n;
 	SeaShells ss;
 	
@@ -23,8 +24,12 @@ public class NemoWorld implements IWorld{
         this.sharkList.draw(c);
         this.wallList.draw(c);
         
-        c.fill(0,0,255);
-        c.circle(200, 200, 5);
+        
+        if (this.n.hitShark(sharkList)) {
+            c.fill(255, 0, 0);
+            c.circle(200, 200, 50);
+        }
+        
         
         this.n.draw(c); // draw nemo
         this.ss.draw(c); // draw seashells

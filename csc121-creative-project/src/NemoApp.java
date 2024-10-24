@@ -3,14 +3,18 @@
 import processing.core.*;
 import processing.event.*;
 
+
 /**
  * Provides the scaffolding to launch a Processing application
  */
 public class NemoApp extends PApplet {	// <----- 1. rename AppTemplate everywhere in this file
 	IWorld w;
+	
+	final static int SCREENWIDTH = 400;
+	final static int SCREENHEIGHT = 400;
 
 	public void settings() {
-		this.size(400, 400);
+		this.size(NemoApp.SCREENWIDTH, NemoApp.SCREENHEIGHT);
 	}
 
 	public void setup() {
@@ -22,10 +26,10 @@ public class NemoApp extends PApplet {	// <----- 1. rename AppTemplate everywher
 						new Cons<Shark>(new Shark(new Posn(100, 300), new Posn(2, 0), new Posn(100, 400), 5, 10, screenWidth, screenHeight),
 								new Cons<Shark>(new Shark(new Posn(300, 200), new Posn(2, 0), new Posn(300, 400), 5, 10, screenWidth, screenHeight),
 										new MT<Shark>())))), 
-				new Cons<Wall>(new Wall(new Posn(100, 100), 50, 10),
-						new Cons<Wall>(new Wall(new Posn(200, 100), 50, 10),
-								new Cons<Wall>(new Wall(new Posn(300, 300), 50, 10),
-										new Cons<Wall>(new Wall(new Posn(400, 300), 50, 10),
+				new Cons<Wall>(new Wall(new Posn(100, 100), 10),
+						new Cons<Wall>(new Wall(new Posn(200, 100), 10),
+								new Cons<Wall>(new Wall(new Posn(300, 300), 10),
+										new Cons<Wall>(new Wall(new Posn(400, 300), 10),
 												new MT<Wall>())))), 
 				new Nemo(new Posn(100,100), 30, 30, 2, 30, 370, 30, 370), 
 				new SeaShells(new Posn(150, 150), 10, 0, 400, 0, 400));
